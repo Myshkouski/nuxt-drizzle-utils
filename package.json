@@ -1,0 +1,44 @@
+{
+  "name": "@nuxt-drizzle/utils",
+  "version": "0.0.1",
+  "description": "Utilities for configuring Drizzle ORM in Nuxt/Nitro applications.",
+  "license": "MIT",
+  "author": "Alexei Myshkouski",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Myshkouski/nuxt-drizzle-utils"
+  },
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "scripts": {
+    "build": "unbuild"
+  },
+  "exports": {
+    "import": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
+    },
+    "require": {
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.cts"
+    }
+  },
+  "files": [
+    "dist/"
+  ],
+  "devDependencies": {
+    "@types/node": "^25.1.0",
+    "typescript": "^5.9.3",
+    "unbuild": "^3.6.1"
+  },
+  "peerDependencies": {
+    "drizzle-kit": "^0.31.8"
+  },
+  "peerDependenciesMeta": {
+    "drizzle-kit": {
+      "optional": true
+    }
+  },
+  "packageManager": "pnpm@10.28.2+sha512.41872f037ad22f7348e3b1debbaf7e867cfd448f2726d9cf74c08f19507c31d2c8e7a11525b983febc2df640b5438dee6023ebb1f84ed43cc2d654d2bc326264"
+}
