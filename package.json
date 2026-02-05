@@ -26,11 +26,16 @@
     },
     "./package.json": "./package.json"
   },
+  "bin": {
+    "nuxt-drizzle": "./dist/cli.mjs"
+  },
   "files": [
     "dist/"
   ],
   "dependencies": {
     "@nuxt/kit": "^4.3.0",
+    "@nuxt/schema": "^4.3.0",
+    "citty": "^0.2.0",
     "consola": "^3.4.2",
     "db0": "^0.3.4",
     "drizzle-orm": "^0.45.1",
