@@ -23,8 +23,7 @@
     "./package.json": "./package.json"
   },
   "bin": {
-    "nuxt-drizzle": "./dist/cli.mjs",
-    "@nuxt-drizzle/cli": "./dist/cli.mjs"
+    "nuxt-drizzle": "./dist/cli.mjs"
   },
   "files": [
     "dist/"
