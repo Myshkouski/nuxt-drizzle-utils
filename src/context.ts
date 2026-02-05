@@ -131,7 +131,7 @@ export interface ModuleContextOptions extends LoggerOptions {
   baseDir: string
   configPattern: string | string[]
   resolver: Resolver
-  datasource?: Record<string, { connector?: ConnectorName } | undefined>
+  datasource: Record<string, { connector?: ConnectorName } | undefined>
 }
 
 export function createModuleContext(options: ModuleContextOptions): ModuleContext {
