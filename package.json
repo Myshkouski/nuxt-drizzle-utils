@@ -1,6 +1,6 @@
 {
   "name": "@nuxt-drizzle/utils",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Configuration utilities and runtime helpers for Drizzle ORM in Nuxt/Nitro applications.",
   "license": "MIT",
   "author": "Alexei Myshkouski",
