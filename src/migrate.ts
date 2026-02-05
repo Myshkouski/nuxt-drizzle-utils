@@ -1,6 +1,6 @@
 import type { MigrationConfig, MigrationMeta } from 'drizzle-orm/migrator'
 
-export async function migrateDrizzle<
+export async function migrate<
   TSession = any
 >(db: DrizzleDatabase<TSession>, migrations: Iterable<Migration> | AsyncIterable<Migration>) {
   for await (const { filename, idx, ...migrationsMeta } of migrations) {

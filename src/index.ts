@@ -1,2 +1,2 @@
 export { defineConfig } from "./defineConfig"
-export { migrateDrizzle } from './migrate'
+export { migrate as migrateDrizzle } from './migrate'
