@@ -16,7 +16,8 @@ export function defineConfig(config: Config, dirname: string) {
     ...other,
   }
 }
-
+function transformToPluginCompatiblePath(dirname: string, cwd: string, path: string | undefined): string | undefined
+function transformToPluginCompatiblePath(dirname: string, cwd: string, path: string | string[] | undefined): string | string[] | undefined
 function transformToPluginCompatiblePath(dirname: string, cwd: string, path: string | string[] | undefined) {
   if (!path) return;
   if (Array.isArray(path)) {
