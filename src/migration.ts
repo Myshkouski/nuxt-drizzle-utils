@@ -22,7 +22,7 @@ export class MigrationError extends Error {
     readonly data: MigrationErrorOptions,
     cause: unknown
   ) {
-    super(`Migration failed: ${data.filename}#${data.filename}`, { cause })
+    super(`Migration failed: ${data.filename}#${data.idx}`, { cause })
   }
 }
 
