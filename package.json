@@ -1,6 +1,7 @@
 {
   "name": "@nuxt-drizzle/utils",
   "version": "0.0.10",
+  "type": "module",
   "description": "Configuration utilities and runtime helpers for Drizzle ORM in Nuxt/Nitro applications.",
   "license": "MIT",
   "author": "Alexei Myshkouski",
@@ -8,6 +9,9 @@
     "type": "git",
     "url": "https://github.com/Myshkouski/nuxt-drizzle-utils"
   },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "scripts": {
     "build": "tsdown"
   },
@@ -34,6 +38,7 @@
     "citty": "^0.2.0",
     "consola": "^3.4.2",
     "db0": "^0.3.4",
+    "drizzle-kit": "^0.31.8",
     "drizzle-orm": "^0.45.1",
     "jiti": "^2.6.1",
     "tsdown": "^0.20.3"
@@ -41,14 +46,6 @@
   "devDependencies": {
     "@types/node": "^25.1.0",
     "typescript": "^5.9.3"
-  },
-  "peerDependencies": {
-    "drizzle-kit": "^0.31.8"
-  },
-  "peerDependenciesMeta": {
-    "drizzle-kit": {
-      "optional": true
-    }
   },
   "publishConfig": {
     "access": "public",
