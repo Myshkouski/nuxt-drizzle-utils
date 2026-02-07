@@ -46,7 +46,7 @@ class ModuleContextImpl implements ModuleContext {
   }
 
   async resolve(forceUpdate?: boolean) {
-    const { logger, baseDir, configPattern, resolver, datasource: db } = this.#options
+    const { logger, baseDir, configPattern, resolver, datasource: db, connectorsDir } = this.#options
 
     if (!!forceUpdate || null == this.#datasources) {
       logger?.info('Searching drizzle datasources in', colorize('blue', baseDir))
@@ -61,6 +61,7 @@ class ModuleContextImpl implements ModuleContext {
           cwd: this.#options.cwd,
           path,
           name,
+          connectorsDir,
           resolver,
         })
       })
@@ -93,12 +94,13 @@ export type TransformDrizzleConfigOptions = {
   name: string
   path: string
   cwd: string
+  connectorsDir: string
   resolver: Resolver
 }
 
 async function transformDrizzleConfig(
   drizzleConfig: DrizzleConfig,
-  { name, path, resolver, cwd }: TransformDrizzleConfigOptions,
+  { name, path, resolver, cwd, connectorsDir }: TransformDrizzleConfigOptions,
 ): Promise<DatasourceInfo> {
   const driver = 'driver' in drizzleConfig
     ? drizzleConfig.driver
@@ -119,18 +121,32 @@ async function transformDrizzleConfig(
             cwd,
           })
         : undefined,
-      connector:
-        await findPath('./connector', { cwd })
-        || resolver.resolve('./runtime/server/drizzle/connectors', driver || dialect),
+      connector: await findPath('./connector', { cwd }) || resolver.resolve(connectorsDir, driver || dialect),
     },
   }
 }
 
 export interface ModuleContextOptions extends LoggerOptions {
+  /**
+   * Current working directory
+   */
   cwd: string
+  /**
+   * Base directory to search drizzle config files
+   */
   baseDir: string
+  /**
+   * Pattern for drizzle config files
+   */
   configPattern: string | string[]
+  /**
+   * Module directory with connectors
+   */
+  connectorsDir: string
   resolver: Resolver
+  /**
+   * Connector options
+   */
   datasource: Record<string, { connector?: ConnectorName } | undefined>
 }
 
