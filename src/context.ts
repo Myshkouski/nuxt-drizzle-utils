@@ -46,7 +46,7 @@ class ModuleContextImpl implements ModuleContext {
   }
 
   async resolve(forceUpdate?: boolean) {
-    const { logger, baseDir, configPattern, resolver, datasource: db, connectorsDir } = this.#options
+    const { logger, baseDir, configPattern, resolver, datasource: db, connectorsDir, helpersDir } = this.#options
 
     if (!!forceUpdate || null == this.#datasources) {
       logger?.info('Searching drizzle datasources in', colorize('blue', baseDir))
@@ -62,6 +62,7 @@ class ModuleContextImpl implements ModuleContext {
           path,
           name,
           connectorsDir,
+          helpersDir,
           resolver,
         })
       })
@@ -95,12 +96,13 @@ export type TransformDrizzleConfigOptions = {
   path: string
   cwd: string
   connectorsDir: string
+  helpersDir: string
   resolver: Resolver
 }
 
 async function transformDrizzleConfig(
   drizzleConfig: DrizzleConfig,
-  { name, path, resolver, cwd, connectorsDir }: TransformDrizzleConfigOptions,
+  { name, path, resolver, cwd, connectorsDir, helpersDir }: TransformDrizzleConfigOptions,
 ): Promise<DatasourceInfo> {
   const driver = 'driver' in drizzleConfig
     ? drizzleConfig.driver
@@ -122,6 +124,7 @@ async function transformDrizzleConfig(
           })
         : undefined,
       connector: await findPath('./connector', { cwd }) || resolver.resolve(connectorsDir, driver || dialect),
+      helpers: resolver.resolve(helpersDir),
     },
   }
 }
@@ -143,6 +146,13 @@ export interface ModuleContextOptions extends LoggerOptions {
    * Module directory with connectors
    */
   connectorsDir: string
+  /**
+   * Module directory with helpers
+   */
+  helpersDir: string
+  /**
+   * Nuxt Kit resolver
+   */
   resolver: Resolver
   /**
    * Connector options
@@ -162,6 +172,7 @@ export interface DatasourceInfo {
     config: string
     schema: string[]
     connector: string
+    helpers: string
     migrations: string | undefined
   }
 }
